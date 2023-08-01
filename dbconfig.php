@@ -1,10 +1,10 @@
 <?php
-
-$hostname = "testdbunivau.mysql.database.azure.com";
-$username = "maleesha";
-$password = "b82D6iAGqmaJm6d";
-$database = "unidb";
-$ca_cert_path = "C:\Users\Maleesha\Desktop\Microsoft Azure VM\DigiCertGlobalRootCA.crt.pem";
+//here i have implemented the database on cloud
+$hostname = "_DB_URL_";
+$username = "_enter_user_name";
+$password = "enter_password_here";
+$database = "_db_name";
+$ca_cert_path = "_enter_the_path";
 
 $conn = mysqli_init();
 mysqli_ssl_set($conn, NULL, NULL, $ca_cert_path, NULL, NULL);
