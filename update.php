@@ -60,6 +60,9 @@
                         <a class="nav-link" href="userlog.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-user-circle"></i></div> User Log info   
                         </a>
+                        <a class="nav-link" href="download.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-download"></i></div> Download Time table   
+                        </a>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
@@ -158,6 +161,10 @@
                                         <option value="LH1">LH1</option>
                                         <option value="LH2">LH2</option>
                                         <option value="SMART LECTURE HALL">SMART LECTURE HALL</option>
+                                        <option value="EISL">EISL</option>
+                                        <option value="EBL">EBL</option>
+                                        <option value="ECL">ECL</option>
+                                        <option value="SLH">SLH</option>
                                     </select>
                                 </div>
                             </div>
