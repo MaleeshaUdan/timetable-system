@@ -16,6 +16,11 @@ https://github.com/MaleeshaUdan
 
 5)Remember i have used a AZURE database there fore my dbconfig.php file is slightly differenece, if you use local host database then plz replace current dbconfig.php file with the dbconfig.php file in INSTRUCTIONS folder.
 
+6)To watch the front end of the time table
+  http://localhost/timetable.php
+
+if you host this system in a network then use the corresponding IP/domain and then timetable.php
+
 **************************************************************************************************************
 IF YOU HAVE ANY ISSUES PLEASE DO NOT HESITATE TO CONTACT ME
 
