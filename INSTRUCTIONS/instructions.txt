@@ -1,0 +1,23 @@
+/*TIME TABLE MANAGEMENT SYSTEM*/
+********************************************************************************************************
+AUTHOR - MALEESHA UDAN ATHTHANAYAKA
+********************************************************************************************************
+maleeshaudan@gmail.com
+********************************************************************************************************
+https://github.com/MaleeshaUdan
+********************************************************************************************************
+
+******PLEASE FOLLOW THESE INSTRUCTIONS*****
+
+1)Download zip file of this project
+2)Extract the files into htdocs directory in xammp
+3)create a database name  unidb
+4)create tables according to the System.sql file inside this folder
+
+5)Remember i have used a AZURE database there fore my dbconfig.php file is slightly differenece, if you use local host database then plz replace current dbconfig.php file with the dbconfig.php file in INSTRUCTIONS folder.
+
+**************************************************************************************************************
+IF YOU HAVE ANY ISSUES PLEASE DO NOT HESITATE TO CONTACT ME
+
++94763326092 WHATSAPP
+maleeshaudan@gmail.com
