@@ -17,6 +17,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $query = "SELECT Day, Time, Subject, Venue FROM schedule WHERE Year_of_study = $selectedYear AND Course = '$selectedCourse'";
     $result = mysqli_query($conn, $query);
 
+    
+    $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    
+    
+    function customSort($a, $b) {
+        $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+        $dayComparison = array_search($a['Day'], $days) - array_search($b['Day'], $days);
+        if ($dayComparison === 0) {
+            return compareTimes($a['Time'], $b['Time']);
+        }
+        return $dayComparison;
+    }
+    
+    function compareTimes($time1, $time2) {
+        $timeRanges = [
+            '8.30-9.30', '9.30-10.30', '10.30-11.30', '11.30-12.30',
+            '12.30-1.30', '1.30-2.30', '2.30-3.30', '3.30-4.30'
+        ];
+
+        $index1 = array_search($time1, $timeRanges);
+        $index2 = array_search($time2, $timeRanges);
+
+        return $index1 - $index2;
+    }
+
+    usort($rows, 'customSort');
+
     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
     $pdf->SetCreator('Your Application');
@@ -36,9 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pdf->Cell(40, 10, 'Day', 1, 0, 'C');
     $pdf->Cell(40, 10, 'Time', 1, 0, 'C');
     $pdf->Cell(40, 10, 'Subject', 1, 0, 'C');
-    $pdf->Cell(40, 10, 'Venue', 1, 1, 'C');
+    $pdf->Cell(60, 10, 'Venue', 1, 1, 'C');
 
-    while ($row = mysqli_fetch_assoc($result)) {
+    foreach ($rows as $row) {
         $day = $row['Day'];
         $time = $row['Time'];
         $subject = $row['Subject'];
@@ -48,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdf->Cell(40, 10, $day, 1, 0, 'C');
         $pdf->Cell(40, 10, $time, 1, 0, 'C');
         $pdf->Cell(40, 10, $subject, 1, 0, 'C');
-        $pdf->Cell(40, 10, $venue, 1, 1, 'C');
+        $pdf->Cell(60, 10, $venue, 1, 1, 'C');
     }
 
     $filename = 'Timetable_' . $selectedCourse . '_' . $selectedYear . '.pdf';
