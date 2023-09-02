@@ -1,9 +1,12 @@
 /*DOCUMENTATION AND THE STRUCTURE OF THE FREE TIME SLOTS MANAGEMENT SYSTEM DATABASE*/
 
 /*Create new user and grant privilages*/
-CREATE USER 'local_user'@'localhost' IDENTIFIED BY 'knkcsnjbsajns55214654s';
-GRANT ALL PRIVILEGES ON unidb.* TO 'local_user'@'localhost';
+/*CREATE USER 'local_user'@'localhost' IDENTIFIED BY 'knkcsnjbsajns55214654s';
+GRANT ALL PRIVILEGES ON unidb.* TO 'local_user'@'localhost'; 
 
+NO NEED
+--------------------------------------------------------------
+*/
 
 CREATE TABLE schedule (
     Id INT PRIMARY KEY AUTO_INCREMENT,
@@ -15,7 +18,6 @@ CREATE TABLE schedule (
     Subject VARCHAR(100),
     Venue VARCHAR(100)
 );
-
 
 CREATE TABLE user (
     Id INT PRIMARY KEY AUTO_INCREMENT,

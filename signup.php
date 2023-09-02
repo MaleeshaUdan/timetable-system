@@ -1,10 +1,10 @@
 <?php
-    session_start();
-    
-    if (!isset($_SESSION['username'])) {
-        echo "<script>alert('Access Denied, Log in First.'); window.location.href = 'login.php';</script>";
-        exit();
-    }
+   session_start();
+
+   if (!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin') {
+       echo "<script>alert('Access Denied, Log in as Admin.Only Admin can access this Page'); window.location.href = 'index.php';</script>";
+       exit();
+   }
 ?>
 
 <!DOCTYPE html>
@@ -59,6 +59,9 @@
                         </a>
                         <a class="nav-link" href="userlog.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-user-circle"></i></div> User Log info   
+                        </a>
+                        <a class="nav-link" href="download.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-download"></i></div> Download Time table   
                         </a>
                     </div>
                 </div>

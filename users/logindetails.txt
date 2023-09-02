@@ -3,3 +3,6 @@ password - 123
 
 username - guest123
 password - yERAYDuwVYYGwHqqdwGNN7jUPUUN
+
+username - admin
+password - EOwaJh23dx6FDks36W8O0
