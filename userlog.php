@@ -3,8 +3,8 @@ require_once 'dbconfig.php';
 
 session_start();
 
-if (!isset($_SESSION['username'])) {
-    echo "<script>alert('Access Denied, Log in First.'); window.location.href = 'login.php';</script>";
+if (!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin') {
+    echo "<script>alert('Access Denied, Log in as Admin.Only Admin can access this Page'); window.location.href = 'index.php';</script>";
     exit();
 }
 
@@ -78,6 +78,9 @@ mysqli_close($conn);
                         </a>
                         <a class="nav-link" href="download.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-download"></i></div> Download Time table   
+                        </a>
+                        <a class="nav-link" href="freeLecHall.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-university"></i></div> Free Lecture Halls   
                         </a>
                     </div>
                 </div>

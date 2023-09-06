@@ -88,68 +88,65 @@
         </div>
     </div>
     <div class="table-container">
-        <?php
-        
-        include_once 'dbconfig.php';
+             <?php
+                include_once 'dbconfig.php';
+                $sql = "SELECT Time, Subject, Venue FROM schedule WHERE Day = ?  AND Year_of_study = ? AND Course = ? AND Semester = ?";
+                $stmt = mysqli_prepare($conn, $sql);
+                if ($stmt) {
+                    mysqli_stmt_bind_param($stmt, "siss", $_POST['selectedDay'], $_POST['selectedyear'], $_POST['selectedcourse'], $_POST['selectedsemester']);
+                    mysqli_stmt_execute($stmt);
+                    mysqli_stmt_store_result($stmt);
+                    if (mysqli_stmt_num_rows($stmt) > 0) {
+                        $timesOrder = [
+                            "8.30-9.30",
+                            "9.30-10.30",
+                            "10.30-11.30",
+                            "11.30-12.30",
+                            "1.30-2.30",
+                            "2.30-3.30",
+                            "3.30-4.30"
+                        ];
+                        $results = array();
+                        mysqli_stmt_bind_result($stmt, $time, $subject, $venue);
 
-        $sql = "SELECT Time, Subject, Venue FROM schedule WHERE Day = ?  AND Year_of_study = ? AND Course = ? AND Semester = ?";
-        $stmt = mysqli_prepare($conn, $sql);
-
-        if ($stmt) {
-            mysqli_stmt_bind_param($stmt, "siss", $_POST['selectedDay'], $_POST['selectedyear'], $_POST['selectedcourse'], $_POST['selectedsemester']);
-
-            mysqli_stmt_execute($stmt);
-
-            mysqli_stmt_store_result($stmt);
-
-
-            if (mysqli_stmt_num_rows($stmt) > 0) {
-                
-                echo "<table class='table table-striped'>";
-                echo "<thead><tr><th>Time</th><th>Subject</th><th>Venue</th></tr></thead>";
-                echo "<tbody>";
-
-                
-                mysqli_stmt_bind_result($stmt, $time, $subject, $venue);
-
-            
-                while (mysqli_stmt_fetch($stmt)) {
-                    echo "<tr><td>" . $time . "</td><td>" . $subject . "</td><td>" . $venue . "</td></tr>";
+                        while (mysqli_stmt_fetch($stmt)) {
+                            $results[] = array('Time' => $time, 'Subject' => $subject, 'Venue' => $venue);
+                        }
+                        function customTimeSort($a, $b) {
+                            global $timesOrder;
+                            $aIndex = array_search($a['Time'], $timesOrder);
+                            $bIndex = array_search($b['Time'], $timesOrder);
+                            return $aIndex - $bIndex;
+                        }
+                        usort($results, 'customTimeSort');
+                        echo "<table class='table table-striped'>";
+                        echo "<thead><tr><th>Time</th><th>Subject</th><th>Venue</th></tr></thead>";
+                        echo "<tbody>";
+                        foreach ($results as $result) {
+                            echo "<tr><td>" . $result['Time'] . "</td><td>" . $result['Subject'] . "</td><td>" . $result['Venue'] . "</td></tr>";
+                        }
+                        echo "</tbody></table>";
+                    } else {
+                        echo "No Record Found";
+                    }
+                    mysqli_stmt_close($stmt);
                 }
-
-                echo "</tbody></table>";
-            } else {
-                
-                echo "No Record Found";
-            }
-
-        
-            mysqli_stmt_close($stmt);
-        }
-
-        mysqli_close($conn);
-        ?>
+                mysqli_close($conn);
+             ?>
     </div>
-    <script>
-        
-        function clearForm() {
-            
+    <script>       
+        function clearForm() {         
             document.getElementById("dayDropdown").value = "";
             document.getElementById("yearDropdown").value = "";
             document.getElementById("courseDropdown").value = "";
-            document.getElementById("semesterDropdown").value = "";
-
-            
+            document.getElementById("semesterDropdown").value = "";          
             document.querySelector(".table-container").innerHTML = "";
         }
-
-        
-        document.querySelector(".btn-danger").addEventListener("click", function(event) {
+            document.querySelector(".btn-danger").addEventListener("click", function(event) {
             event.preventDefault(); 
             clearForm();
         });
     </script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.min.js"></script>
 </body>

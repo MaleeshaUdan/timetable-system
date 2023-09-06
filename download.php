@@ -139,6 +139,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <a class="nav-link" href="download.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-download"></i></div> Download Time table   
                         </a>
+                        <a class="nav-link" href="freeLecHall.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-university"></i></div> Free Lecture Halls   
+                        </a>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
